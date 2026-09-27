@@ -283,7 +283,7 @@ other Linux distributions and bootloader configurations may require changing the
 
 ## contributing (i meannn, only if you want to i guesss)
 
-contributions are welcome obviously :)
+contributions are welcome obviously
 
 if you find a bug, want to improve compatibility, or want to add a feature, feel free to:
 
