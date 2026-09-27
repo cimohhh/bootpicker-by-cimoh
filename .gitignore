@@ -1,0 +1,11 @@
+Build/
+Conf/
+
+*.obj
+*.dll
+*.pdb
+*.map
+*.log
+*.tmp
+
+.vscode/
