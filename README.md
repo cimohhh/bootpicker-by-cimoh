@@ -4,7 +4,7 @@ this is a custom UEFI boot picker written in C++ using TianoCore EDK II for dual
 obviously its amazing because it was made by me, give it a try BUT before you do anything make sure to look at this README (VERY IMPORTANT!). 
 this was made specifically for my dual boot system, your system may be different from mine and its very important that you configure this to work on YOUR system.
 
-## features
+## features (YAY!!)
 
 - runs as a real UEFI application before the operating system starts
 - lets you choose between Arch Linux and Windows 11
@@ -15,13 +15,13 @@ this was made specifically for my dual boot system, your system may be different
 - can be tested from a USB
 - can be installed permanently as its own UEFI boot entry
 
-## controls
+## controls (very very simple)
 
 - `Up Arrow` / `Down Arrow` — change selection
 - `Enter` — boot selected operating system
 - `Esc` — exit the boot picker
 
-## default EFI paths
+## default EFI paths (again like i said, your system may be different from mine. make sure this works for your system!)
 
 the current version is configured to use these paths:
 
@@ -41,7 +41,7 @@ your Linux EFI path may be different depending on how your system is configured.
 
 if your Arch EFI file is stored somewhere else, edit the path inside `BootPicker.cpp` before building.
 
-## project structure
+## project structure (ooooouuu shittt)
 
 ```text
 BootPickerPkg/
@@ -88,7 +88,7 @@ it defines:
 - build options
 - project components
 
-## Requirements
+## requirements (pay attention, okay?)
 
 to build the project, you will need:
 
@@ -99,7 +99,7 @@ to build the project, you will need:
 - Python
 - Git
 
-## building
+## building (the sort-of-a-headache part, ughhh i know.)
 
 place `BootPickerPkg` inside your EDK II directory.
 
@@ -187,7 +187,7 @@ USB
 
 then reboot your PC and select the USB from your motherboard's UEFI boot menu.
 
-## permanent installation
+## permanent installation (FINALLYYYYYYYY)
 
 boot Picker can also be installed permanently on the EFI System Partition.
 
@@ -247,7 +247,7 @@ files such as these should remain untouched:
 
 the safest method is to install boot picker as its own EFI application and create a separate UEFI firmware boot entry for it.
 
-## secure boot
+## secure boot (FUCK secure boot, i dont use it. but if you do use secure boot, read this.)
 
 the current EFI binary is not signed by default.
 
@@ -257,7 +257,7 @@ if the application does not start, check whether secure boot is enabled.
 
 be careful when changing secure boot settings, especially on systems using bitLocker (honestly disable that bullsht PLEASE) or device encryption.
 
-## compatibility
+## compatibility (hmmmmm)
 
 this project was originally created and tested with:
 
@@ -269,7 +269,7 @@ this project was originally created and tested with:
 
 other Linux distributions and bootloader configurations may require changing the EFI paths in `BootPicker.cpp`.
 
-## my future ideas
+## my future ideas (you better be fucking excited)
 
 - automatic EFI bootloader detection
 - config file support
