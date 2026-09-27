@@ -4,7 +4,7 @@ this is a custom UEFI boot picker written in C++ using TianoCore EDK II for dual
 obviously its amazing because it was made by me, give it a try BUT before you do anything make sure to look at this README (VERY IMPORTANT!). 
 this was made specifically for my dual boot system, your system may be different from mine and its very important that you configure this to work on YOUR system.
 
-## features (YAY!)
+## features
 
 - runs as a real UEFI application before the operating system starts
 - lets you choose between Arch Linux and Windows 11
@@ -15,7 +15,7 @@ this was made specifically for my dual boot system, your system may be different
 - can be tested from a USB
 - can be installed permanently as its own UEFI boot entry
 
-## controls (very simple)
+## controls 
 
 - `Up Arrow` / `Down Arrow` — change selection
 - `Enter` — boot selected operating system
