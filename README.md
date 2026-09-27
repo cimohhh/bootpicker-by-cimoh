@@ -253,7 +253,7 @@ the current EFI binary is not signed by default.
 
 because of this, systems with secure boot enabled may refuse to launch it.
 
-if the application does not start, check whether Secure Boot is enabled.
+if the application does not start, check whether secure boot is enabled.
 
 be careful when changing secure boot settings, especially on systems using bitLocker (honestly disable that bullsht PLEASE) or device encryption.
 
