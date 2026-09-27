@@ -1,4 +1,4 @@
-# bootpicker-cimoh
+# bootpicker by cimoh
 
 this is a custom UEFI boot picker written in C++ using TianoCore EDK II for dual booting Arch Linux and Windows 11. 
 obviously its amazing because it was made by me, give it a try BUT before you do anything make sure to look at this README (VERY IMPORTANT!). 
