@@ -41,7 +41,7 @@ your Linux EFI path may be different depending on how your system is configured.
 
 if your Arch EFI file is stored somewhere else, edit the path inside `BootPicker.cpp` before building.
 
-## project structure (ooooouuu shittt)
+## project structure (oouuu shiiii)
 
 ```text
 BootPickerPkg/
