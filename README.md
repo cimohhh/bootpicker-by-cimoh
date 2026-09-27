@@ -255,7 +255,7 @@ because of this, systems with secure boot enabled may refuse to launch it.
 
 if the application does not start, check whether secure boot is enabled.
 
-be careful when changing secure boot settings, especially on systems using bitLocker (honestly disable that bullsht PLEASE) or device encryption.
+be careful when changing secure boot settings, especially on systems using bitLocker (honestly disable that bullshit PLEASE) or device encryption.
 
 ## compatibility (hmmmmm)
 
