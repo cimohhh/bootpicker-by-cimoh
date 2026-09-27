@@ -281,6 +281,20 @@ other Linux distributions and bootloader configurations may require changing the
 - graphical UEFI interface
 - secure boot signing support
 
+## contributing (i meannn, only if you wanttt to. i guesss)
+
+contributions are welcome obviously :)
+
+if you find a bug, want to improve compatibility, or want to add a feature, feel free to:
+
+- open an issue
+- fork the repository
+- create a new branch
+- make your changes
+- open a pull request
+
+please keep changes focused and explain what they do in the pull request. ily.
+
 ## license
 
 this project is licensed under the MIT License.
