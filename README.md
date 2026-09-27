@@ -21,7 +21,7 @@ this was made specifically for my dual boot system, your system may be different
 - `Enter` — boot selected operating system
 - `Esc` — exit the boot picker
 
-## default EFI paths (again like i said, your system may be different from mine. make sure this works for your system!)
+## default EFI paths (like i said, your system may be different from mine. make sure this works for your system!)
 
 the current version is configured to use these paths:
 
