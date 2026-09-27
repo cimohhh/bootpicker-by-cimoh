@@ -99,7 +99,7 @@ to build the project, you will need:
 - Python
 - Git
 
-## building (the sort-of-a-headache part, ughhh i know.)
+## building (the sort of a headache part, ughhh i know.)
 
 place `BootPickerPkg` inside your EDK II directory.
 
