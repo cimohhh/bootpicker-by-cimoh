@@ -4,7 +4,7 @@ this is a custom UEFI boot picker written in C++ using TianoCore EDK II for dual
 obviously its amazing because it was made by me, give it a try BUT before you do anything make sure to look at this README (VERY IMPORTANT!). 
 this was made specifically for my dual boot system, your system may be different from mine and its very important that you configure this to work on YOUR system.
 
-## features (YAY!!)
+## features (YAY!)
 
 - runs as a real UEFI application before the operating system starts
 - lets you choose between Arch Linux and Windows 11
@@ -15,7 +15,7 @@ this was made specifically for my dual boot system, your system may be different
 - can be tested from a USB
 - can be installed permanently as its own UEFI boot entry
 
-## controls (very very simple)
+## controls (very simple)
 
 - `Up Arrow` / `Down Arrow` — change selection
 - `Enter` — boot selected operating system
@@ -41,7 +41,7 @@ your Linux EFI path may be different depending on how your system is configured.
 
 if your Arch EFI file is stored somewhere else, edit the path inside `BootPicker.cpp` before building.
 
-## project structure (oouuu shiiii)
+## project structure
 
 ```text
 BootPickerPkg/
@@ -88,7 +88,7 @@ it defines:
 - build options
 - project components
 
-## requirements (pay attention, okay?)
+## requirements 
 
 to build the project, you will need:
 
@@ -99,7 +99,7 @@ to build the project, you will need:
 - Python
 - Git
 
-## building (the sort of a headache part, i know.)
+## building 
 
 place `BootPickerPkg` inside your EDK II directory.
 
@@ -187,9 +187,9 @@ USB
 
 then reboot your PC and select the USB from your motherboard's UEFI boot menu.
 
-## permanent installation (FINALLYYYYYYYY)
+## permanent installation
 
-boot Picker can also be installed permanently on the EFI System Partition.
+boot picker can also be installed permanently on the EFI System Partition.
 
 a safe layout is:
 
@@ -233,7 +233,7 @@ if you want Boot Picker to launch automatically when your PC starts, place its b
 
 your disk and EFI partition may be different, so check your own system before running installation commands.
 
-## important warning (i mean it, VERY IMPORTANT! OKAY?)
+## important warning 
 
 do not overwrite, rename, or delete your existing Windows or Linux EFI bootloaders.
 
@@ -247,7 +247,7 @@ files such as these should remain untouched:
 
 the safest method is to install boot picker as its own EFI application and create a separate UEFI firmware boot entry for it.
 
-## secure boot (FUCK secure boot, i dont use it. but if you do use secure boot, read this.)
+## secure boot 
 
 the current EFI binary is not signed by default.
 
@@ -255,9 +255,9 @@ because of this, systems with secure boot enabled may refuse to launch it.
 
 if the application does not start, check whether secure boot is enabled.
 
-be careful when changing secure boot settings, especially on systems using bitLocker (honestly disable that bullshit PLEASE) or device encryption.
+be careful when changing secure boot settings, especially on systems using bitLocker or device encryption.
 
-## compatibility (hmmmmm)
+## compatibility 
 
 this project was originally created and tested with:
 
@@ -269,7 +269,7 @@ this project was originally created and tested with:
 
 other Linux distributions and bootloader configurations may require changing the EFI paths in `BootPicker.cpp`.
 
-## my future ideas (you better be fucking excited)
+## my future ideas 
 
 - automatic EFI bootloader detection
 - config file support
@@ -281,9 +281,9 @@ other Linux distributions and bootloader configurations may require changing the
 - graphical UEFI interface
 - secure boot signing support
 
-## contributing (i meannn, only if you want to i guesss)
+## contributing
 
-contributions are welcome obviously
+contributions are welcome.
 
 if you find a bug, want to improve compatibility, or want to add a feature, feel free to:
 
@@ -293,7 +293,7 @@ if you find a bug, want to improve compatibility, or want to add a feature, feel
 - make your changes
 - open a pull request
 
-please keep changes focused and explain what they do in the pull request, ily.
+please keep changes focused and explain what they do in the pull request.
 
 ## license
 
