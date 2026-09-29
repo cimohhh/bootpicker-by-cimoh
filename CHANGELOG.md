@@ -6,7 +6,7 @@ all notable changes to this project will be documented here.
 
 
 
-## v1.0.0 - 2026-09-28
+## v1.0.0 - 9/28/26
 
 ### added
 - full graphical UEFI boot picker interface.
