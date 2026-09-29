@@ -2,7 +2,7 @@
 
 this project is a custom graphical **UEFI boot picker** for dual-booting **Arch Linux and Windows 11**, built in C++ with EDK II.
 
-bootPicker runs before either operating system starts and provides a simple keyboard controlled graphical menu for choosing which OS to boot.
+bootpicker runs before either operating system starts and provides a simple keyboard controlled graphical menu for choosing which OS to boot.
 
 ![Arch Linux selected](BootPicker/Assets/ArchSelectedFinal.png)
 
