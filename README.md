@@ -1,29 +1,38 @@
-# bootpicker by cimoh
+# bootpicker
 
-this is a custom UEFI boot picker written in C++ using TianoCore EDK II for dual booting Arch Linux and Windows 11. 
-obviously its amazing because it was made by me, give it a try BUT before you do anything make sure to look at this README (VERY IMPORTANT!). 
-this was made specifically for my dual boot system, your system may be different from mine and its very important that you configure this to work on YOUR system.
+this project is a custom graphical **UEFI boot picker** for dual-booting **Arch Linux and Windows 11**, built in C++ with EDK II.
+
+bootPicker runs before either operating system starts and provides a simple keyboard controlled graphical menu for choosing which OS to boot.
+
+![Arch Linux selected](BootPicker/Assets/ArchSelectedFinal.png)
+
+![Windows 11 selected](BootPicker/Assets/WindowsSelectedFinal.png)
 
 ## features
 
-- runs as a real UEFI application before the operating system starts
-- lets you choose between Arch Linux and Windows 11
-- uses the arrow keys to move between operating systems
-- press Enter to boot the selected operating system
-- press Esc to exit
-- launches EFI bootloaders directly
-- can be tested from a USB
-- can be installed permanently as its own UEFI boot entry
+- native UEFI application
+- graphical interface using UEFI GOP
+- 2560×1440 boot screen artwork
+- Arch Linux and Windows 11 support
+- keyboard navigation
+- automatically prefers a 2560×1440 GOP mode
+- falls back to the highest available GOP resolution
+- directly chainloads the selected EFI bootloader
+- no GRUB required
+- can be safely tested from a USB drive before installation
 
-## controls 
+## controls
 
-- `Up Arrow` / `Down Arrow` — change selection
-- `Enter` — boot selected operating system
-- `Esc` — exit the boot picker
+| Key | Action |
+| --- | --- |
+| `↑` | Select Arch Linux |
+| `↓` | Select Windows 11 |
+| `Enter` | Boot selected operating system |
+| `Esc` | Exit BootPicker |
 
-## default EFI paths (like i said, your system may be different from mine. make sure this works for your system!)
+## default boot paths
 
-the current version is configured to use these paths:
+bootpicker currently expects:
 
 ### Arch Linux
 
@@ -37,264 +46,248 @@ the current version is configured to use these paths:
 \EFI\Microsoft\Boot\bootmgfw.efi
 ```
 
-your Linux EFI path may be different depending on how your system is configured.
+these paths can be changed near the top of:
 
-if your Arch EFI file is stored somewhere else, edit the path inside `BootPicker.cpp` before building.
+```text
+BootPicker/BootPickerFinal.cpp
+```
 
 ## project structure
 
 ```text
-BootPickerPkg/
-├── BootPickerPkg.dsc
-└── BootPicker/
-    ├── BootPicker.cpp
-    └── BootPicker.inf
+bootpicker-cimoh/
+│
+├── BootPickerFinalPkg.dsc
+│
+├── BootPicker/
+│   ├── BootPickerFinal.cpp
+│   ├── BootPickerFinal.inf
+│   │
+│   └── Assets/
+│       ├── ArchSelected.bmp
+│       ├── WindowsSelected.bmp
+│       ├── ArchSelectedFinal.png
+│       └── WindowsSelectedFinal.png
+│
+├── README.md
+└── LICENSE
 ```
 
-## what each file does
+the PNG files are the source/display versions of the artwork.
 
-### BootPicker.cpp
+the BMP files are the versions loaded directly by bootpicker while running in UEFI.
 
-this is the actual boot picker program.
+## requirements
 
-it:
+to build bootpicker on Windows:
 
-- draws the boot menu
-- reads keyboard input
-- moves the selection with the arrow keys
-- launches the selected EFI bootloader
-- boots either Arch Linux or Windows 11
-
-### BootPicker.inf
-
-this tells EDK II that the project is a UEFI application.
-
-it defines:
-
-- the source file
-- required packages
-- required UEFI libraries
-- the application entry point
-
-### BootPickerPkg.dsc
-
-this is the main EDK II build configuration.
-
-it defines:
-
-- the platform
-- target architecture
-- libraries
-- build options
-- project components
-
-## requirements 
-
-to build the project, you will need:
-
-- Windows
-- TianoCore EDK II
-- Visual Studio Build Tools
+- Windows 11
+- EDK II
+- visual studio build tools
 - NASM
-- Python
-- Git
+- python
+- git
 
-## building 
+the current project was built using the `VS2026` EDK II toolchain.
 
-place `BootPickerPkg` inside your EDK II directory.
+## building
 
-example:
+clone EDK II first:
 
-```text
-edk2/
-└── BootPickerPkg/
+```cmd
+git clone https://github.com/tianocore/edk2.git
+cd edk2
 ```
 
-open a visual studio developer command prompt.
+initialize the EDK II submodules if required:
 
-change into your EDK II directory:
+```cmd
+git submodule update --init
+```
+
+clone bootpicker directly into the EDK II workspace as `BootPickerPkg`:
+
+```cmd
+git clone https://github.com/cimohhh/bootpicker-cimoh.git BootPickerPkg
+```
+
+open a visual studio developer command prompt and go to the EDK II directory:
 
 ```cmd
 cd /d C:\path\to\edk2
 ```
 
-add NASM to your PATH if needed:
-
-```cmd
-set PATH=C:\path\to\NASM;%PATH%
-```
-
-set up EDK II:
+make sure NASM is available in `PATH`, then initialize EDK II:
 
 ```cmd
 edksetup.bat
 ```
 
-then build:
+build bootpicker:
 
 ```cmd
-build -a X64 -t VS2026 -b DEBUG -p BootPickerPkg\BootPickerPkg.dsc
+build -a X64 -t VS2026 -b DEBUG -p BootPickerPkg\BootPickerFinalPkg.dsc
 ```
 
-if the build succeeds, you should see:
+after a successful build, the EFI executable should be located at:
 
 ```text
-- Done -
+Build\BootPickerFinal\DEBUG_VS2026\X64\BootPicker.efi
 ```
 
-the compiled EFI application should appear at:
+## assets
+
+bootpicker uses two 24-bit BMP files:
 
 ```text
-Build\BootPicker\DEBUG_VS2026\X64\BootPicker.efi
+ArchSelected.bmp
+WindowsSelected.bmp
 ```
 
-## testing from a USB
-
-format a USB drive as FAT32.
-
-create this folder structure:
+the final artwork is designed for:
 
 ```text
-EFI\BOOT
+2560 × 1440
+RGB
+24-bit BMP
 ```
 
-copy:
+bootpicker searches several locations for its images, including:
 
 ```text
-BootPicker.efi
+\EFI\BootPicker\Assets\
+\EFI\BOOT\Assets\
+\Assets\
 ```
 
-into:
+for a normal permanent installation, the recommended layout is:
 
 ```text
-EFI\BOOT
+EFI\
+└── BootPicker\
+    ├── BootPicker.efi
+    └── Assets\
+        ├── ArchSelected.bmp
+        └── WindowsSelected.bmp
 ```
 
-then rename it to:
+## testing from USB
+
+testing from USB is something i really recommend before installing bootpicker to your internal EFI system partition.
+
+format a USB drive as a UEFI readable filesystem such as FAT32.
+
+create:
 
 ```text
-BOOTX64.EFI
+EFI\
+├── BOOT\
+│   └── BOOTX64.EFI
+│
+└── BootPicker\
+    └── Assets\
+        ├── ArchSelected.bmp
+        └── WindowsSelected.bmp
 ```
 
-the final USB layout should look like this:
+copy the compiled bootpicker EFI executable to:
 
 ```text
-USB
-└── EFI
-    └── BOOT
-        └── BOOTX64.EFI
+EFI\BOOT\BOOTX64.EFI
 ```
 
-then reboot your PC and select the USB from your motherboard's UEFI boot menu.
+then copy both BMP files to:
+
+```text
+EFI\BootPicker\Assets\
+```
+
+reboot the computer and select the USB's **UEFI** entry from the motherboard boot menu.
+
+this allows bootpicker to be tested without replacing the existing internal boot configuration.
 
 ## permanent installation
 
-boot picker can also be installed permanently on the EFI System Partition.
+> **Warning** (i'm serious)
+>
+> be careful when modifying the EFI System Partition. do not delete or overwrite your Windows or Linux bootloader files.
 
-a safe layout is:
+a typical internal EFI layout may look like:
+
+```text
+EFI\
+├── BootPicker\
+│   ├── BootPicker.efi
+│   └── Assets\
+│       ├── ArchSelected.bmp
+│       └── WindowsSelected.bmp
+│
+├── Linux\
+│   └── arch-linux.efi
+│
+├── Microsoft\
+│   └── Boot\
+│       └── bootmgfw.efi
+│
+└── systemd\
+```
+
+bootpicker should be installed separately from the operating system bootloaders.
+
+do **not** overwrite:
+
+```text
+EFI\Microsoft\
+EFI\Linux\
+EFI\systemd\
+```
+
+once installed, create a UEFI firmware boot entry pointing to:
 
 ```text
 \EFI\BootPicker\BootPicker.efi
 ```
 
-do not replace the Windows or Linux EFI files.
+## how it works
 
-### example on Linux
+bootpicker uses the UEFI graphics output protocol to display the graphical menu.
 
-copy `BootPicker.efi` to your EFI system partition.
+at startup it:
 
-for example:
+1. locates the UEFI graphics output protocol.
+2. searches for a 2560×1440 graphics mode.
+3. falls back to the available mode with the highest pixel count if 2560×1440 is unavailable.
+4. loads the selected state BMP from an EFI filesystem.
+5. displays the artwork directly through GOP.
+6. waits for keyboard input.
+7. loads and starts the selected operating system's EFI executable.
 
-```text
-/boot/EFI/BootPicker/BootPicker.efi
-```
+the graphical interface itself is stored as pre rendered images, allowing smoother text, logos, borders, and effects than firmware fonts would normally provide.
 
-then create a new UEFI boot entry with `efibootmgr`.
+## secure boot
 
-example:
+bootpicker is currently an unsigned custom EFI application.
 
-```bash
-sudo efibootmgr -c -d /dev/nvme0n1 -p 1 -L "Boot Picker" -l '\EFI\BootPicker\BootPicker.efi'
-```
+systems with secure boot enabled may refuse to launch it unless the EFI binary is signed with a trusted key.
 
-check your current boot entries:
+if bootpicker does not launch, check the system's secure boot configuration.
 
-```bash
-sudo efibootmgr
-```
+## current targets
 
-you should see an entry similar to:
-
-```text
-Boot0001* Boot Picker
-```
-
-if you want Boot Picker to launch automatically when your PC starts, place its boot entry first in the firmware boot order.
-
-your disk and EFI partition may be different, so check your own system before running installation commands.
-
-## important warning 
-
-do not overwrite, rename, or delete your existing Windows or Linux EFI bootloaders.
-
-files such as these should remain untouched:
-
-```text
-\EFI\Microsoft\Boot\bootmgfw.efi
-\EFI\systemd\systemd-bootx64.efi
-\EFI\Linux\arch-linux.efi
-```
-
-the safest method is to install boot picker as its own EFI application and create a separate UEFI firmware boot entry for it.
-
-## secure boot 
-
-the current EFI binary is not signed by default.
-
-because of this, systems with secure boot enabled may refuse to launch it.
-
-if the application does not start, check whether secure boot is enabled.
-
-be careful when changing secure boot settings, especially on systems using bitLocker or device encryption.
-
-## compatibility 
-
-this project was originally created and tested with:
+the default configuration is designed for:
 
 - Arch Linux
 - Windows 11
-- systemd-boot
-- UEFI firmware
-- x86-64 hardware
+- x86-64 UEFI systems
 
-other Linux distributions and bootloader configurations may require changing the EFI paths in `BootPicker.cpp`.
+other Linux distributions can be used by changing the Linux EFI path in the source code.
 
-## my future ideas 
+## disclaimer
 
-- automatic EFI bootloader detection
-- config file support
-- support for more operating systems
-- custom colors
-- boot timeout
-- default operating system selection
-- better error messages
-- graphical UEFI interface
-- secure boot signing support
+modifying EFI partitions and firmware boot entries can make an operating system temporarily unbootable if done incorrectly.
 
-## contributing
+always keep a known good boot method available and test bootpicker from USB before making it the default firmware boot entry.
 
-contributions are welcome.
+## License
 
-if you find a bug, want to improve compatibility, or want to add a feature, feel free to:
-
-- open an issue
-- fork the repository
-- create a new branch
-- make your changes
-- open a pull request
-
-please keep changes focused and explain what they do in the pull request.
-
-## license
-
-this project is licensed under the MIT License.
+see [LICENSE](LICENSE).
