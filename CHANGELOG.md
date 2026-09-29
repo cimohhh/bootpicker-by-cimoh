@@ -30,6 +30,8 @@ all notable changes to this project will be documented here.
 - bootpicker is an unsigned EFI application, so secure boot may need to be disabled unless the binary is signed.
 - the graphical version was tested successfully from USB before being installed as the permanent UEFI boot picker.
 
+__________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+
 ## v1.0.0
 
 - initial public release
